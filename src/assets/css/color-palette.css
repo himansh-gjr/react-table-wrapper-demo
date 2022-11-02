@@ -1,0 +1,52 @@
+:root {
+  /* Dark Neutral */
+  --dark: #040e20;
+  --dark-standard: #172b4d;
+  --dark-light: #6b778c;
+  --dark-subdued: #c1c7d0;
+  --dark-faint: #dfe1e6;
+
+  /* Light Neutral */
+  --light: #f4f5f7;
+  --light-dark: #dfe1e6;
+  --light-standard: #ebecf0;
+  --light-subdued: #fafbfc;
+  --light-faint: #ffffff;
+
+  /* Primary */
+  --primary-dark: #0621b6;
+  --primary-standard: #0d3cfe;
+  --primary-light: #4970fe;
+  --primary-subdued: #9eb6fe;
+  --primary-faint: #EBF0FF;
+
+  /* Secondary */
+  --secondary-dark: #008377;
+  --secondary-standard: #00b782;
+  --secondary-light: #34d396;
+  --secondary-subdued: #94f7be;
+  --secondary-faint: #c9fbd9;
+
+  /* Warning */
+  --warning-dark: #b77b23;
+  --warning-standard: #ffc148;
+  --warning-light: #ffd576;
+  --warning-subdued: #ffedb5;
+  --warning-faint: #fef7da;
+
+  /* Danger */
+  --danger-dark: #b72742;
+  --danger-standard: #ff4f51;
+  --danger-light: #ff857a;
+  --danger-subdued: #ffc9b8;
+  --danger-faint: #ffe7db;
+
+  /* blacks */
+  --pure-black: #000000;
+  --black: #201f20;
+  --black-deep: #0e0d0e;
+  --black-dark: #241c3c;
+  --black-shadow: #172b4d29;
+  --black-shadow-1: #c7e9ff;
+  --black-shadow-2: rgb(23 43 77 / 15%);
+}

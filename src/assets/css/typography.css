@@ -1,0 +1,112 @@
+/*! Here defined the typograhy classes. Already present in /stylesHomepage */
+:root {
+  --font: Inter;
+  --style: normal;
+
+  --d-x-large-fs: 3rem;
+  --d-x-large-lh: 3.33rem;
+  --d-x-large-fw: 500;
+
+  --d-large-fs: 2rem;
+  --d-large-lh: 2.33rem;
+  --d-large-fw: 500;
+
+  --d-medium-fs: 1.66rem;
+  --d-medium-lh: 2rem;
+  --d-medium-fw: 400;
+
+  --d-small-fs: 1.41rem;
+  --d-small-lh: 1.66rem;
+  --d-small-fw: 400;
+
+  --pageHeading-fs: 1.66rem;
+  --pageHeading-lh: 2rem;
+  --pageHeading-fw: 600;
+
+  --heading-fs: 1.41rem;
+  --heading-lh: 1.66rem;
+  --heading-fw: 500;
+
+  --subHeading-fs: 1.17rem;
+  --subHeading-lh: 1.34rem;
+  --subHeading-fw: 500;
+
+  --button-fs: 1rem;
+  --button-lh: 1.33rem;
+  --button-fw: 500;
+
+  --body-fs: 1rem;
+  --body-lh: 1.33rem;
+  --body-fw: 400;
+
+  --caption-fs: 0.83rem;
+  --caption-lh: 1rem;
+  --caption-fw: 400;
+
+  --s-screen-d-x-large-fs: 2rem;
+  --s-screen-d-x-large-lh: 2.28rem;
+  --s-screen-d-x-large-fw: 500;
+
+  --s-screen-d-large-fs: 1.71rem;
+  --s-screen-d-large-lh: 2rem;
+  --s-screen-d-large-fw: 500;
+
+  --s-screen-d-medium-fs: 1.42rem;
+  --s-screen-d-medium-lh: 1.71rem;
+  --s-screen-d-medium-fw: 400;
+
+  --s-screen-d-small-fs: 1.28rem;
+  --s-screen-d-small-lh: 1.42rem;
+  --s-screen-d-small-fw: 400;
+
+  --s-screen-pageHeading-fs: 1.42rem;
+  --s-screen-pageHeading-lh: 1.71rem;
+  --s-screen-pageHeading-fw: 600;
+
+  --s-screen-heading-fs: 1.28rem;
+  --s-screen-heading-lh: 1.42rem;
+  --s-screen-heading-fw: 500;
+
+  --s-screen-subHeading-fs: 1.14rem;
+  --s-screen-subHeading-lh: 1.42rem;
+  --s-screen-subHeading-fw: 500;
+
+  --s-screen-button-fs: 1rem;
+  --s-screen-button-lh: 1.42rem;
+  --s-screen-button-fw: 500;
+
+  --s-screen-body-fs: 1rem;
+  --s-screen-body-lh: 1.42rem;
+  --s-screen-body-fw: 400;
+
+  --s-screen-caption-fs: 0.85rem;
+  --s-screen-caption-lh: 1.14rem;
+  --s-screen-caption-fw: 400;
+
+  /* spacing */
+  --extra-tight-spacing: 0.33rem;
+  --tight-spacing: 0.66rem;
+  --base-tight-spacing: 1rem;
+  --default-spacing: 1.33rem;
+  --loose-spacing: 1.66rem;
+  --extra-loose-spacing: 2.66rem;
+
+  /* mobile spacing */
+  --m-extra-tight-spacing: 0.28rem;
+  --m-tight-spacing: 0.57rem;
+  --m-base-tight-spacing: 0.857rem;
+  --m-default-spacing: 1.14rem;
+  --m-loose-spacing: 1.42rem;
+  --m-extra-loose-spacing: 2.28rem;
+
+  /*Sidebar*/
+  --sidebar-active: 20rem;
+  --sidebar-inactive: 3.4rem;
+
+  /* Modal */
+  --xl-width:67.33rem;
+  --m-width:33.33rem;
+
+  /* mobile-view-modal */
+  --s-m-width: 29.25rem;
+}
