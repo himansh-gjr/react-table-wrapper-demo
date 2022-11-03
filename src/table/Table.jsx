@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo } from "react"
-import "./table.css"
 import {
 	useExpanded,
 	useRowSelect,
-	useColumnOrder,
 	useSortBy,
 	useTable,
 	usePagination,
@@ -11,9 +9,10 @@ import {
 import classnames from "classnames"
 import PropTypes from "prop-types"
 import { DEFAULT_TABLE_ID } from "./constants"
+import "./table.css"
 
 const Table = ({
-	id, //
+	id,
 	showPagination,
 	useManualSorting,
 	useManualPagination,
@@ -23,19 +22,30 @@ const Table = ({
 	className,
 	showSelect,
 	loading,
-	EmptyStates, // react component
-	PaginationComponent, // react component
-	LoaderScreen, // react component
-	Checkbox, // react component
+	EmptyStates,
+	PaginationComponent,
+	LoaderScreen,
+	Checkbox,
 	setSelectedRows,
 	hideHeader,
-	SortIcon, //icon
+	SortIcon,
 	onPageChangeCallback,
 	...props
 }) => {
+	/**
+	 * recommended to use useMemo hook for the columns
+	 * if your component re-renders then a new columns array will be created
+	 * to optimizse and re-calculate all the underlying logic again, we use useMemo hook and memorize the cloumns
+	 * we can always re-render/re-calculate the columns array by passing the depend variable on in the dependency array of the 'useMemo' hook
+	 */
 	const columns = useMemo(() => props.columns, [sortBy, ...updateColProps])
+	// Data that needs to render inside the table
 	const data = props.data
 
+	/**
+	 * required to use useTable hook from react-table to a table instance
+	 * data and columns are the required props, rest are additional requirement props like for sorting, pagination and filter
+	 */
 	const tableInstance = useTable(
 		{
 			columns,
@@ -53,7 +63,9 @@ const Table = ({
 		useExpanded,
 		usePagination,
 		useRowSelect,
-		useColumnOrder,
+		/**
+		 * custom hook that is responsible to render a selection checkbox on both header and on each row
+		 */
 		(hooks) => {
 			hooks.visibleColumns.push((columns) => {
 				let defaultSelection = {
@@ -84,7 +96,6 @@ const Table = ({
 				return columns
 			})
 		}
-		// useBlockLayout
 	)
 
 	const {
@@ -94,11 +105,11 @@ const Table = ({
 		rows,
 		prepareRow,
 		selectedFlatRows,
-		visibleColumns,
-		page, // Instead of using 'rows', we'll use page,
-		// which has only the rows for the active page
-
-		// The rest of these things are super handy, too ;)
+		/**
+		 * Instead of using 'rows', we'll use page
+		 * which has only the rows for the active page
+		 */
+		page,
 		canPreviousPage,
 		canNextPage,
 		pageOptions,
@@ -107,22 +118,23 @@ const Table = ({
 		nextPage,
 		previousPage,
 		setPageSize,
-		setColumnOrder,
-		setHiddenColumns,
-		allColumns,
-		state: {
-			pageIndex,
-			pageSize,
-			// expanded,
-			hiddenColumns,
-		},
+		state: { pageIndex, pageSize },
 	} = tableInstance
 
+	/**
+	 * selectedFlatRows contains all the selected rows from the active table rows
+	 * we call setSelectedRows callback everytime selectedFlatRows updates
+	 */
 	useEffect(() => {
 		setSelectedRows && setSelectedRows(selectedFlatRows, id)
 	}, [selectedFlatRows, id])
 
-	const visibleRows = showPagination && !useManualPagination ? page : rows // show pagination but don't use manualPagination then
+	/**
+	 * page contains the current active/displayed rows if pagination is enabled
+	 * rows contains array of all rows
+	 * we decide to choose between these two based on the pagination is enabled or not
+	 */
+	const visibleRows = showPagination && !useManualPagination ? page : rows
 
 	return (
 		<div className={className} id={id}>
@@ -257,31 +269,41 @@ const Table = ({
 }
 
 Table.prototype = {
-	id: PropTypes.string,
-	showPagination: PropTypes.bool,
-	useManualSorting: PropTypes.bool,
-	useManualPagination: PropTypes.bool,
-	pageCount: PropTypes.number,
+	id: PropTypes.string, // id attribute to distinguish between multiple table container
+	className: PropTypes.string, // custom className attribute for the table container
+	showPagination: PropTypes.bool, // set 'true' if you want to show pagination on the table
+	useManualPagination: PropTypes.bool, // 'true' if you wish to use pagination on your custom implementaion of pagination
+	useManualSorting: PropTypes.bool, // set to 'true' if you want to implement your own sorting and not the sorting that react table provides out of the box
+	pageCount: PropTypes.number, // this feild is required in order to work with the pagination component only if showPagination is set to true
 	sortBy: PropTypes.shape({
 		sort: PropTypes.string,
 		type: PropTypes.string,
-	}),
+	}), // custom sorting object
+	/**
+	 * we will receive this 'updateColProps' as an dependency array for 'columns' prop in the useMemo hook
+	 */
 	updateColProps: PropTypes.array,
-	className: PropTypes.string,
-	showSelect: PropTypes.bool,
-	loading: PropTypes.bool,
-	EmptyStates: PropTypes.element,
-	PaginationComponent: PropTypes.elementType,
-	LoaderScreen: PropTypes.elementType,
+	showSelect: PropTypes.bool, // to enable row selection on the table
+	loading: PropTypes.bool, // renders a loading screen if it is true
+	LoaderScreen: PropTypes.elementType, // loading screen react component
+	EmptyStates: PropTypes.element, // empty state react component
+	PaginationComponent: PropTypes.elementType, // react component that is responsible to render UI of the pagination and in it's props we will provide all the hanlders that pagination needs like : pageIndex, pageCount, onPageChange.
+	/**
+	 * when showSelect is set to 'true'
+	 * our table renders a selection component that we receive from this prop
+	 */
 	Checkbox: PropTypes.elementType,
-	setSelectedRows: PropTypes.func,
-	hideHeader: PropTypes.bool,
-	SortIcon: PropTypes.any,
-	onPageChangeCallback: PropTypes.func,
-	data: PropTypes.array,
-	columns: PropTypes.array,
+	setSelectedRows: PropTypes.func, // callback function that accepts all the selected rows and id as arguments
+	hideHeader: PropTypes.bool, // handy in the cases where we wish to hide the header of our table
+	SortIcon: PropTypes.any, // Sort Icon that we need to display in the header
+	onPageChangeCallback: PropTypes.func, // callback that will accept current pageIndex as an argument and will trigger on every page change of pagination
+	data: PropTypes.array, // data that table needs to render
+	columns: PropTypes.array, // columns for table
 }
 
+/**
+ * Set deatult Props for the component
+ */
 Table.defaultProps = {
 	id: DEFAULT_TABLE_ID,
 	showPagination: false,
