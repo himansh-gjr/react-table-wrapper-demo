@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import Table from "./table/Table"
 import MOCK_DATA from "./MOCK_DATA.json"
 import EmptyStates from "./components/empty-states/EmptyStates"
-import Pagination from "./table/pagination"
+import Pagination from "./components/pagination"
 import LoaderScreen from "./components/LoaderScreen/LoaderScreen"
 import Checkbox from "./components/checkbox/index"
 import SortIcon from "./assets/image/sort.png"
@@ -24,9 +24,10 @@ const Colums = () => [
 		Cell: ({ row }) => <p>{row.original.last_name}</p>,
 	},
 	{
-		Header: "ip_address",
-		accessor: "ip_address",
-		Cell: ({ row }) => <p>{row.original.ip_address}</p>,
+		Header: "date",
+		accessor: "date",
+		Cell: ({ row }) => <p>{row.original.date}</p>,
+		align:"right"
 	},
 ]
 
@@ -58,7 +59,7 @@ const renderEmptyState = (row) => {
 
 const PAGE_SIZE = 20
 
-const TableDemo = () => {
+const DemoTable = () => {
 
 	const [pageCount, setPageCount] = useState(0)
 
@@ -108,4 +109,4 @@ const PaginationComponent = ({
 	)
 }
 
-export default TableDemo
+export default DemoTable

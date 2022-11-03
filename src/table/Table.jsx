@@ -68,6 +68,7 @@ const Table = ({
 		 */
 		(hooks) => {
 			hooks.visibleColumns.push((columns) => {
+				// default UX for the selection
 				let defaultSelection = {
 					id: "selection",
 					align: "left",
@@ -84,8 +85,11 @@ const Table = ({
 						</div>
 					),
 				}
+				/**
+				 * check if the coumns already have any selection or not
+				 * if it has then remove the selection column if it exists
+				 */
 				let hasCustomSelection = columns.findIndex((c) => c.id === "selection")
-
 				if (hasCustomSelection < 0) {
 					columns.unshift(defaultSelection)
 				}
