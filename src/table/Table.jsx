@@ -9,20 +9,20 @@ import {
 	usePagination,
 } from "react-table/dist/react-table.development"
 import classnames from "classnames"
+import PropTypes from "prop-types"
 import { DEFAULT_TABLE_ID } from "./constants"
 
 const Table = ({
-	id = DEFAULT_TABLE_ID,
-	showPagination = false,
-	useManualSorting = false,
-	useManualPagination = false,
+	id, //
+	showPagination,
+	useManualSorting,
+	useManualPagination,
 	pageCount: controlledPageCount,
-	sortBy = "",
-	updateColProps = [],
-	className = "table_container",
-	showSelect = true,
-	loading = false,
-	emptyMsg = "No Data Found",
+	sortBy,
+	updateColProps,
+	className,
+	showSelect,
+	loading,
 	EmptyStates, // react component
 	PaginationComponent, // react component
 	LoaderScreen, // react component
@@ -185,12 +185,12 @@ const Table = ({
 										return (
 											<td
 												{...cell.getCellProps()}
-												className={
+												className={`${
 													cell.column.align !== "left" &&
 													(cell.column.manualSorting ||
 														cell.column.canSort) &&
 													"sort-padding"
-												}
+												}`}
 												style={{
 													textAlign: cell.column.align || "right",
 													width: cell.column.width,
@@ -254,6 +254,47 @@ const Table = ({
 			)}
 		</div>
 	)
+}
+
+Table.prototype = {
+	id: PropTypes.string,
+	showPagination: PropTypes.bool,
+	useManualSorting: PropTypes.bool,
+	useManualPagination: PropTypes.bool,
+	pageCount: PropTypes.number,
+	sortBy: PropTypes.shape({
+		sort: PropTypes.string,
+		type: PropTypes.string,
+	}),
+	updateColProps: PropTypes.array,
+	className: PropTypes.string,
+	showSelect: PropTypes.bool,
+	loading: PropTypes.bool,
+	EmptyStates: PropTypes.element,
+	PaginationComponent: PropTypes.elementType,
+	LoaderScreen: PropTypes.elementType,
+	Checkbox: PropTypes.elementType,
+	setSelectedRows: PropTypes.func,
+	hideHeader: PropTypes.bool,
+	SortIcon: PropTypes.any,
+	onPageChangeCallback: PropTypes.func,
+	data: PropTypes.array,
+	columns: PropTypes.array,
+}
+
+Table.defaultProps = {
+	id: DEFAULT_TABLE_ID,
+	showPagination: false,
+	useManualSorting: false,
+	useManualPagination: false,
+	pageCount: 0,
+	sortBy: "",
+	updateColProps: [],
+	className: "table_container",
+	showSelect: true,
+	loading: false,
+	hideHeader: false,
+	onPageChangeCallback: () => {},
 }
 
 export default Table
