@@ -22,6 +22,7 @@ const Pagination = (props) => {
   });
 
   return (
+    <>
     <ul
       className={classnames("pagination-container", { [className]: className })}
     >
@@ -54,6 +55,7 @@ const Pagination = (props) => {
         );
       })}
     </ul>
+    </>
   );
 };
 

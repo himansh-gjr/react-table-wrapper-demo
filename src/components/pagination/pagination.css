@@ -1,9 +1,6 @@
 .pagination {
   align-items: center;
   margin: var(--default-spacing) 0;
-  display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .prev_next_section {

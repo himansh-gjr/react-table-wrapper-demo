@@ -5,10 +5,13 @@ import {
 	useSortBy,
 	useTable,
 	usePagination,
+	// useBlockLayout,
+	// useResizeColumns,
 } from "react-table/dist/react-table.development"
 import classnames from "classnames"
 import PropTypes from "prop-types"
 import { DEFAULT_TABLE_ID } from "./constants"
+import SelectBox from "../components/select-box/index"
 import "./table.css"
 
 const Table = ({
@@ -49,13 +52,14 @@ const Table = ({
 	const tableInstance = useTable(
 		{
 			columns,
+			// defaultColumn,
 			data,
 			autoResetExpanded: false,
 			disableSortBy: useManualSorting,
 			manualPagination: useManualPagination,
 			initialState: {
 				pageIndex: 0,
-				pageSize: 21,
+				pageSize: 20,
 			},
 			pageCount: controlledPageCount,
 		},
@@ -63,6 +67,8 @@ const Table = ({
 		useExpanded,
 		usePagination,
 		useRowSelect,
+		// useBlockLayout,
+		// useResizeColumns,
 		/**
 		 * custom hook that is responsible to render a selection checkbox on both header and on each row
 		 */
@@ -122,6 +128,7 @@ const Table = ({
 		nextPage,
 		previousPage,
 		setPageSize,
+		// resetResizing,
 		state: { pageIndex, pageSize },
 	} = tableInstance
 
@@ -165,25 +172,25 @@ const Table = ({
 									>
 										{column.canSort ? (
 											<div
-												className="d-button"
-												style={{
-													display: "flex",
-													alignItems: "center",
-													gap: "var(--extra-tight-spacing)",
-													justifyContent:
-														column.align === "left"
-															? "start"
-															: column.align === "center"
-															? "center"
-															: "end",
-													cursor: "pointer",
-												}}
-											>
+											className="d-button"
+											style={{
+											  display: "flex",
+											  alignItems: "center",
+											  gap: "var(--extra-tight-spacing)",
+											  justifyContent:
+												column.align === "left"
+												  ? "start"
+												  : column.align === "center"
+												  ? "center"
+												  : "end",
+											  cursor: "pointer",
+											}}
+										  >
 												{column.render("Header")}
 												{column.canSort && <img src={SortIcon} />}
 											</div>
 										) : (
-											column.render("Header")
+												column.render("Header")
 										)}
 									</th>
 								)
@@ -229,6 +236,28 @@ const Table = ({
 						Showing page {pageIndex + 1} of {pageOptions.length}
 					</span>
 					<div className="flex justify-between prev_next_section">
+							<span className="d-body">Page Size</span>
+							<SelectBox
+								options={[20, 30, 50, 100, 200].map((o) => ({
+									label: o,
+									value: o,
+								}))}
+								enablePositionToggle
+								value={pageSize - 1}
+								containerStyle={{ minWidth: "unset" }}
+								onChange={(value) => setPageSize(value + 1)}
+							/>
+							<div className="jump-to-page-input">
+							<input
+								type="number"
+								defaultValue={0}
+								onChange={(e) => {
+									gotoPage(e.target.value - 1)
+									onPageChangeCallback(e.target.value)
+								}}
+								placeholder={"Jump to page"}
+							/>
+						</div>
 						<div className="pagination_nav_section">
 							<label
 								className={classnames(

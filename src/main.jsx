@@ -6,12 +6,15 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-import './index.css'
 import { HomePage } from './HomePage';
 import BasicTable from './BasicTable';
 import RowSelectTable from './RowSelectTable';
 import SortingTable from './SortingTable';
 import DemoTable from './DemoTable';
+import './assets/css/color-palette.css'
+import './assets/css/index.css'
+import './assets/css/typography.css'
+import './index.css'
 
 const router = createBrowserRouter([
   {

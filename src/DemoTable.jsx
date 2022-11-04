@@ -12,22 +12,25 @@ const Colums = () => [
 		Header: "id",
 		accessor: "id",
 		Cell: ({ row }) => <p>{row.original.id}</p>,
+		align:"left"
 	},
 	{
 		Header: "first_name",
 		accessor: "first_name",
 		Cell: ({ row }) => <p>{row.original.first_name}</p>,
+		align:"right"
 	},
 	{
 		Header: "last_name",
 		accessor: "last_name",
 		Cell: ({ row }) => <p>{row.original.last_name}</p>,
+		align:"left"
 	},
 	{
 		Header: "date",
 		accessor: "date",
 		Cell: ({ row }) => <p>{row.original.date}</p>,
-		align:"right"
+		align:"left"
 	},
 ]
 
