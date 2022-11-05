@@ -72,3 +72,22 @@
   background-color: transparent;
   cursor: default;
 }
+
+@media only screen and (max-width: 768px) {
+  .pagination{
+    flex-direction: column;
+  }
+
+  .prev_next_section{
+    flex-wrap: wrap;
+  }
+
+  .pagination_nav_section{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .jump-to-page-input{
+    margin-left: unset;
+  }
+}

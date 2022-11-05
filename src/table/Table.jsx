@@ -11,8 +11,13 @@ import {
 import classnames from "classnames"
 import PropTypes from "prop-types"
 import { DEFAULT_TABLE_ID } from "./constants"
+import SortIcon from "../assets/image/sort.png"
 import SelectBox from "../components/select-box/index"
 import "./table.css"
+import EmptyStates from "../components/empty-states/EmptyStates"
+import Pagination from "../components/pagination"
+import LoaderScreen from "../components/LoaderScreen/LoaderScreen"
+import Checkbox from "../components/checkbox"
 
 const Table = ({
 	id,
@@ -84,7 +89,6 @@ const Table = ({
 							<Checkbox {...getToggleAllRowsSelectedProps()} />
 						</div>
 					),
-
 					Cell: ({ row }) => (
 						<div>
 							<Checkbox {...row.getToggleRowSelectedProps()} />
@@ -350,6 +354,11 @@ Table.defaultProps = {
 	loading: false,
 	hideHeader: false,
 	onPageChangeCallback: () => {},
+	EmptyStates : <EmptyStates message={"No Data Found"} />,
+	PaginationComponent:Pagination,
+	LoaderScreen:LoaderScreen,
+	Checkbox:Checkbox,
+	SortIcon:SortIcon,
 }
 
 export default Table
